@@ -31,9 +31,9 @@ def IN(seed,
     w3=tf.Variable(W3,name="weights3")
     b3=tf.Variable(B3,name="biases3")
     
-    out1=tf.nn.relu(tf.matmul(X,w1)+b1)
+    out1=tf.nn.tanh(tf.matmul(X,w1)+b1)
     out1=tf.nn.dropout(out1,keep_prob,seed=seed)
-    out2=tf.nn.relu(tf.matmul(out1,w2)+b2)
+    out2=tf.nn.tanh(tf.matmul(out1,w2)+b2)
     out2=tf.nn.dropout(out2,keep_prob,seed=seed)
     out3=tf.matmul(out2,w3)+b3
     

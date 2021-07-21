@@ -130,13 +130,13 @@ p0=train_X.shape[1] # the number of original variables
 #----------------------------------------------------------------------------------------------------
 
 n_classes=2
-n_hidden1=64
+n_hidden1=32
 n_hidden2=16
-learning_rate=0.0005
-epochs=100
-batch_size=64
+learning_rate=0.001
+epochs=50
+batch_size=32
 num_batches=train_X.shape[0]/batch_size
-dropout=0.287997
+dropout=0.109
 alpha=0.03 # used for a GL_alpha stopping criterion
 
 print('train_X shape', train_X.shape[0], train_X.shape[1], 'num_batches', num_batches )
