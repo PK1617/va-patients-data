@@ -56,10 +56,17 @@ def data():
     df = pd.read_excel('Cleaned_Dataframe.xlsx')
     df.set_index('Sample',inplace=True)
 
+    df_cancer = df.loc[df['Status'] == 'Cancer']
+    df_control = df.loc[df['Status'] == 'Control']
 
+    #randomly seelct 538 samples from the cancer population to create an equal sample size 
+    df_cancer_small = df_cancer.sample(n=538, random_state = 100)
+
+    df1 = pd.concat([df_cancer_small, df_control])
     #separate cancer markers and input data
-    df_outputs= df['Status']
-    df_inputs = df.drop('Status',axis=1)
+    df_outputs= df1['Status']
+    df_inputs = df1.drop(['Status'],axis=1)
+
     
     X_train, X_test_val, y_train, y_test_val = train_test_split(df_inputs, df_outputs, random_state=100, stratify=df_outputs, test_size=0.4)
     X_val, X_test, y_val, y_test = train_test_split(X_test_val, y_test_val, random_state=100, stratify=y_test_val, test_size=0.5)
@@ -131,12 +138,12 @@ p0=train_X.shape[1] # the number of original variables
 
 n_classes=2
 n_hidden1=32
-n_hidden2=16
+n_hidden2=24
 learning_rate=0.001
-epochs=50
+epochs=100
 batch_size=32
 num_batches=train_X.shape[0]/batch_size
-dropout=0.109
+dropout=0.25886
 alpha=0.03 # used for a GL_alpha stopping criterion
 
 print('train_X shape', train_X.shape[0], train_X.shape[1], 'num_batches', num_batches )
